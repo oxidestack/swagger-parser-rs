@@ -527,9 +527,21 @@ mod tests {
         assert_eq!(InetAddress::get_by_name("::ffff:1.2.3.4%1").unwrap_err().to_java_string(), "java.net.UnknownHostException: ::ffff:1.2.3.4%1: invalid IPv4-mapped address");
         assert_eq!(InetAddress::get_by_name("1:2:3:4:5:6:7:8:9").unwrap_err().to_java_string(), "java.net.UnknownHostException: 1:2:3:4:5:6:7:8:9: invalid IPv6 address literal");
         assert_eq!(lit("fe80::1%lo0"), "fe80:0:0:0:0:0:0:1%lo0");
-        assert_eq!(lit("12345678901"), "223.220.28.53");
         assert_eq!(lit("0"), "0.0.0.0");
         assert_eq!(lit("::"), "0:0:0:0:0:0:0:0");
         assert_eq!(lit("1.2.3"), "1.2.0.3");
+    }
+
+    /// An all-digit host too large for 32 bits is no literal to Java: both `textToNumericFormatV4` and
+    /// `parseBsdLiteralV4` reject it, so `getAllByName` hands it to the OS resolver, as the port does. What comes
+    /// back is the platform's: macOS's resolver parses it with `inet_aton`, which wraps it modulo 2^32, while glibc
+    /// refuses the overflow and goes on to a DNS lookup that fails. Only the rejection by both parsers holds
+    /// everywhere; the resolved address is asserted where it is known.
+    #[test]
+    fn oversized_decimal_goes_to_the_resolver() {
+        assert_eq!(text_to_numeric_format_v4("12345678901"), None);
+        assert_eq!(parse_bsd_literal_v4("12345678901"), None);
+        #[cfg(target_os = "macos")]
+        assert_eq!(lit("12345678901"), "223.220.28.53");
     }
 }
