@@ -1,0 +1,29 @@
+[package]
+name = "snakeyaml-rs"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.87"
+repository = "https://github.com/oxidestack/swagger-parser-rs"
+homepage = "https://oxidestack.github.io/swagger-parser-rs/"
+documentation = "https://docs.rs/snakeyaml-rs"
+description = "A port of SnakeYAML 2.6 (loading, resolving, SafeConstructor, emitting) as used by swagger-parser and Jackson YAML"
+keywords = ["yaml", "snakeyaml", "parser", "java"]
+categories = ["encoding", "parser-implementations"]
+# What crates.io gets: the library alone; its tests and their fixtures stay in the repository.
+include = ["/src/**"]
+
+[lib]
+name = "snakeyaml"
+
+[dependencies]
+num-bigint = "0.4.8"
+base64 = "0.23.1"
+regex = "1.13.1"
+parking_lot = "0.12.5"
+java-compat = { package = "java-compat-rs", path = "../../../java-compat-rs", version = "0.1.0" }
+
+[dev-dependencies]
+sha2 = "0.10"
+serde_json = "1"
+base64 = "0.23.1"

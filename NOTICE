@@ -1,0 +1,23 @@
+swagger-parser-rs
+Copyright The swagger-parser-rs Authors. Licensed under the Apache License, Version 2.0 (LICENSE).
+
+This crate is an unofficial Rust port of the following works. It is not affiliated with or endorsed by their authors.
+
+swagger-parser 2.1.48 (https://github.com/swagger-api/swagger-parser), Copyright SmartBear Software, Apache-2.0.
+  The root crate and crates/safe-url-resolver port its modules and its tests. upstream/ is the original source at the
+  ported release, a git submodule, unmodified, with its own LICENSE.
+
+swagger-core 2.2.53 (https://github.com/swagger-api/swagger-core), Copyright SmartBear Software, Apache-2.0.
+  src/models ports its OpenAPI v3 models, and the JSON and YAML printers.
+
+swagger-parser 1.0.76, swagger-core 1.6.16 and swagger-models 1.6.16, Copyright SmartBear Software, Apache-2.0.
+  src/v2 and src/compat port the Swagger 2.0 stack that swagger-parser's converter uses.
+
+Jackson 2.22 (https://github.com/FasterXML/jackson), Copyright FasterXML, LLC, Apache-2.0.
+  crates/jackson reproduces the behaviour of jackson-core, jackson-databind and jackson-dataformat-yaml that
+  swagger-parser relies on, as recorded from the real library (reference/).
+
+SnakeYAML 2.6 (https://bitbucket.org/snakeyaml/snakeyaml), Copyright the SnakeYAML authors, Apache-2.0.
+  crates/snakeyaml ports its loader, resolver, SafeConstructor and emitter.
+
+Test inputs taken from these works, and expected outputs recorded from them, remain under their licences.

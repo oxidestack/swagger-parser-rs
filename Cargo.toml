@@ -1,0 +1,47 @@
+[package]
+name = "swagger-parser-rs"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.88"
+description = "Unofficial Rust port of swagger-parser 2.1.48: OpenAPI 3.x / Swagger 2.0 parsing, reference resolution and conversion"
+repository = "https://github.com/oxidestack/swagger-parser-rs"
+homepage = "https://oxidestack.github.io/swagger-parser-rs/"
+documentation = "https://docs.rs/swagger-parser-rs"
+readme = "README.md"
+keywords = ["openapi", "swagger", "parser", "oas"]
+categories = ["parser-implementations"]
+# What crates.io gets: the library, its licence and notice, the README and the changelog. The pinned
+# upstream sources, the tests and their recorded vectors, the tools, the docs and the site stay in the
+# repository.
+include = ["/src/**", "/LICENSE", "/NOTICE", "/README.md", "/CHANGELOG.md"]
+
+[package.metadata.port]
+upstream = "swagger-parser"
+upstream-version = "2.1.48"
+
+[workspace]
+members = ["crates/jackson", "crates/snakeyaml", "crates/java-rt", "crates/safe-url-resolver"]
+
+[lib]
+name = "swagger_parser"
+
+[dependencies]
+jackson = { package = "jackson-rs", path = "crates/jackson", version = "0.1.0" }
+snakeyaml = { package = "snakeyaml-rs", path = "crates/snakeyaml", version = "0.1.0" }
+java-rt = { package = "java-rt-rs", path = "crates/java-rt", version = "0.1.0" }
+swagger-parser-safe-url-resolver = { package = "swagger-parser-safe-url-resolver-rs", path = "crates/safe-url-resolver", version = "0.1.0" }
+indexmap = "2.14.2"
+num-bigint = "0.4.8"
+parking_lot = "0.12.5"
+java-compat = { package = "java-compat-rs", path = "../java-compat-rs", version = "0.1.0" }
+regex = "1.13.1"
+base64 = "0.23.1"
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12"] }
+rustls-native-certs = "0.8"
+zip = { version = "9.7", default-features = false, features = ["deflate-flate2-zlib-rs"] }
+
+[dev-dependencies]
+sha2 = "0.10"
+rcgen = "0.13"
+parking_lot = "0.12.5"

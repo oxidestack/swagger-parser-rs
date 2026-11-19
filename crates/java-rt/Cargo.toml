@@ -1,0 +1,19 @@
+[package]
+name = "java-rt-rs"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.87"
+repository = "https://github.com/oxidestack/swagger-parser-rs"
+homepage = "https://oxidestack.github.io/swagger-parser-rs/"
+documentation = "https://docs.rs/java-rt-rs"
+description = "Java runtime behaviour shared by the swagger-parser crates: exceptions as values, java.net.URI / URL"
+keywords = ["java", "uri", "url"]
+categories = ["network-programming"]
+# What crates.io gets: the library alone; its tests and their fixtures stay in the repository.
+include = ["/src/**"]
+
+[lib]
+name = "java_rt"
+
+[dependencies]

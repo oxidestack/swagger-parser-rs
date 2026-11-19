@@ -1,0 +1,26 @@
+## [0.1.0] - YYYY-MM-DD
+
+### Action required
+
+- `strict_mode` is no longer read. A configuration that sets it sets `strict` to the same value instead. (0045ff4)
+
+### Features
+
+- Input may come from any `std::io::Read`. (02f6666)
+- The `trim` option drops trailing whitespace from the output. (parser, d3638ed)
+
+### Bug fixes
+
+- An error raised in a nested call names the position of the call, so a caller finds it. (1b81337)
+- Input that is not UTF-8 returns an error instead of a panic. (af9dd70)
+- An error names the line of the input, as the Java library does. (11edf02)
+
+### Performance
+
+- An input used twice is parsed once, so using it again is faster. (3faa001)
+
+### Other changes
+
+- The README lists every option with its default. (f2bd18e)
+
+[0.1.0]: https://github.com/oxidestack/swagger-parser-rs/releases/tag/v0.1.0

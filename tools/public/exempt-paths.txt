@@ -1,0 +1,7 @@
+# Verbatim third-party files, which cannot be scrubbed: tools/public/public_check.py skips the built-in local-path and
+# internal-host patterns and the worklog rule for them. The denylist still applies. One `<glob>  # <reason>` per line;
+# `**` any path, `*` within a directory, a leading `!` takes a path back out (the last matching line wins).
+upstream/**  # the pinned swagger-parser sources and their licence, a git submodule, never edited
+tests/v3_openapi_resolver.rs  # ported swagger-parser test: an upstream fixture's Windows path kept verbatim as the expected value
+crates/java-rt/src/idn.rs  # IDN test cases mirroring swagger-parser's URL matcher test: its `.local` example hosts
+crates/safe-url-resolver/tests/url_pattern_matcher.rs  # ported swagger-parser test: example hosts and private-range addresses kept verbatim

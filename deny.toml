@@ -1,0 +1,58 @@
+# cargo-deny configuration: the licence gate (the `deny` job on both forges).
+#
+# swagger-parser-rs is built to become part of a CNCF project, so every crate in its graph must carry a
+# licence on the CNCF allowed third-party licence policy
+# (https://github.com/cncf/foundation/blob/main/policies-guidance/allowed-third-party-license-policy.md). Anything
+# else needs a Governing Board exception (https://exceptions.cncf.io) and is listed below as a named exception, each
+# citing the reason. A new crate with any other licence fails `cargo deny check licenses`: it is not
+# added (or it gets its own ticket and entry here), and `allow` is never widened to make the gate green. The `allow`
+# block is the CNCF allowlist, as the sibling ports' deny.toml carry it.
+
+[graph]
+# Every feature, so a dependency behind a non-default feature is still checked.
+all-features = true
+
+[advisories]
+# RustSec: a vulnerability, an unsound crate, an unmaintained crate or a yanked version fails the gate.
+unmaintained = "all"
+yanked = "deny"
+# Checked 2026-11-17.
+# chrono and chrono-tz come in through java-compat-rs (dates, time zones). Both are "unmaintained", not a
+# vulnerability, and no safe upgrade exists; look again when the advisories move.
+ignore = [
+    { id = "RUSTSEC-2026-0543", reason = "chrono is unmaintained; no upgrade exists (2026-11-17)" },
+    { id = "RUSTSEC-2026-0555", reason = "chrono-tz is unmaintained; no upgrade exists (2026-11-17)" },
+]
+
+[licenses]
+# The CNCF allowlist, exactly. `Apache-2.0 WITH LLVM-exception` is not on it; crates offering it also offer plain
+# Apache-2.0 or MIT, which is what they are used under.
+allow = [
+    "Apache-2.0",
+    "MIT",
+    "MIT-0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Zlib",
+    "PostgreSQL",
+    "Python-2.0",
+    "PSF-2.0",
+    "X11",
+    "UPL-1.0",
+    "0BSD",
+    "OpenSSL",
+]
+# The allowlist is the policy, not the licences the graph happens to use today.
+unused-allowed-license = "allow"
+confidence-threshold = 0.93
+
+# Each exception names one crate and allows only the licence it needs; the rest of its expression (an `AND`) must still
+# be allowlisted. An exception that no longer matches a crate in the graph is reported, and is then deleted here.
+#
+exceptions = [
+    # unicode-ident's tables (a proc-macro dependency of zeroize's and wasm-bindgen's derives). CNCF status: none
+    # for Unicode-3.0 (the only Unicode exception is go-textseg under Unicode-DFS-2016, exc-2026-02-18-001,
+    # cncf/foundation#1242); listed as pending, as mock-server does.
+    { crate = "unicode-ident@1.0.26", allow = ["Unicode-3.0"] },
+]

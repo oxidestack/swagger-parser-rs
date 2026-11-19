@@ -1,0 +1,28 @@
+[package]
+name = "jackson-rs"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.87"
+repository = "https://github.com/oxidestack/swagger-parser-rs"
+homepage = "https://oxidestack.github.io/swagger-parser-rs/"
+documentation = "https://docs.rs/jackson-rs"
+description = "The parts of Jackson 2.22 (core, databind tree model, dataformat-yaml) that swagger-parser relies on, byte-for-byte"
+keywords = ["json", "yaml", "jackson", "java"]
+categories = ["encoding", "parser-implementations"]
+# What crates.io gets: the library alone; its tests and their fixtures stay in the repository.
+include = ["/src/**"]
+
+[dev-dependencies]
+sha2 = "0.10"
+
+[lib]
+name = "jackson"
+
+[dependencies]
+indexmap = "2.14.2"
+num-bigint = "0.4.8"
+num-traits = "0.2"
+snakeyaml = { package = "snakeyaml-rs", path = "../snakeyaml", version = "0.1.0" }
+java-rt = { package = "java-rt-rs", path = "../java-rt", version = "0.1.0" }
+java-compat = { package = "java-compat-rs", path = "../../../java-compat-rs", version = "0.1.0" }

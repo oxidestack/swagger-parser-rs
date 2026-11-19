@@ -1,0 +1,23 @@
+[package]
+name = "swagger-parser-safe-url-resolver-rs"
+version = "0.1.0"
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.87"
+repository = "https://github.com/oxidestack/swagger-parser-rs"
+homepage = "https://oxidestack.github.io/swagger-parser-rs/"
+documentation = "https://docs.rs/swagger-parser-safe-url-resolver-rs"
+description = "A port of swagger-parser-safe-url-resolver 2.1.48"
+keywords = ["url", "ssrf", "swagger", "openapi"]
+categories = ["network-programming", "web-programming"]
+# What crates.io gets: the library alone; its tests and their fixtures stay in the repository.
+include = ["/src/**"]
+
+[lib]
+name = "swagger_parser_safe_url_resolver"
+
+[dependencies]
+java-rt = { package = "java-rt-rs", path = "../java-rt", version = "0.1.0" }
+
+[dev-dependencies]
+parking_lot = "0.12.5"

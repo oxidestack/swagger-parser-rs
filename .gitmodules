@@ -1,0 +1,4 @@
+[submodule "upstream"]
+	path = upstream
+	url = https://github.com/swagger-api/swagger-parser.git
+	shallow = true
